@@ -1,0 +1,204 @@
+html,body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background-color: #fff;
+}
+
+#wrapper {
+    margin: 0 auto;
+    border-left: 1px solid gray;
+    border-right: 1px solid gray;
+    background-color: white;
+    min-height: 400px;
+}
+
+.optional {
+    display: none;
+}
+
+#messages {
+    height: 200px;
+    border: 1px solid black;
+    overflow: auto;
+    clear: left;
+}
+
+#messages p {
+    line-height: 1em;
+    margin: 0;
+}
+
+#controls, #info {
+    float: left;
+    height: 50px;
+    margin: 0px;
+    padding: 0px;
+    border: 1px solid black;
+}
+
+#controls {
+    width: 19%;
+}
+
+#controls input[type="button"] {
+    border: none;
+    background-color: #F0F0F0;
+    color: black;
+    height: 50px;
+    width: 100%;
+}
+
+#controls input[type="button"]:hover {
+    background-color: gray;
+}
+
+#info {
+    border: 1px solid black;
+    width: 80%;
+    height:
+}
+
+.chart {
+    text-align: center;
+    margin: 0 auto;
+}
+
+.vertex {
+    stroke: black;
+    fill: white;
+}
+
+.vertex:hover {
+    fill: yellow;
+}
+
+.vertex.start {
+    fill: green;
+}
+
+.vertex.end {
+    fill: red;
+}
+
+.line {
+    stroke: red;
+}
+
+.visited {
+    fill: gray;
+    stroke: gray;
+}
+
+.path {
+    stroke-width: 5;
+    stroke: red;
+    fill: red;
+}
+
+.processing {
+    fill: yellow;
+}
+
+text {
+    font: 8px sans-serif;
+}
+
+.weight {
+    fill: gray;
+}
+
+.distance {
+    fill: black;
+}
+
+.bar {
+    fill: gray;
+    stroke: black;
+    stroke-width: 1;
+}
+
+.link {
+    text-decoration: underline;
+    color: blue;
+}
+
+
+/*****************custom css************************/
+.conn-line{
+    stroke:rgb(255,0,0);
+    stroke-width:0.5;
+}
+.conn-image{
+    transform: translateY(-2.3px);
+}
+
+
+
+#search-wrapper h1 {
+  text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+}
+
+#search-wrapper  h1, #search-wrapper  h2 {
+  text-align: center;
+  color: white;
+  font-size: 2.5em;
+  line-height: 1.3em;
+  font-weight: 300;
+}
+
+#search-wrapper  h2 {
+  margin-top: 100px;
+  font-size: 1.3em;
+  font-style: italic;
+  font-weight: 100;
+}
+
+#search-wrapper  .body {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#search-wrapper  input {
+  box-sizing: border-box;
+  font-size: 13px;
+  vertical-align: top;
+}
+
+#search-wrapper  .wrapper {
+  text-align: center;
+  font-size: 0;
+}
+
+#search-wrapper  .search {
+  padding: 0 10px;
+  font-size: 12px;
+  width: 16%;
+  max-width: 400px;
+  outline: none;
+  height: 30px;
+  border: 1px solid #b3b3b3;
+}
+
+#search-wrapper  .submit {
+  cursor: pointer;
+    border: none;
+    background: url(search-icon-white-png-540.png) no-repeat center center, #1E1E20;
+    background-size: 15px 15px;
+    border-radius: 0 20px 20px 0;
+    padding: 5px 5px;
+    display: inline-block;
+    width: 8%;
+    height: 30px;
+}
+.ui-widget-content.ui-autocomplete {
+    max-height: 30%;
+    overflow: scroll;
+}
+div#search-wrapper {
+    background-color: cornflowerblue;
+    padding: 14px;
+    position: fixed;
+    width: 100%;
+}
+
