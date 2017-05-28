@@ -130,7 +130,7 @@ text {
     stroke-width:0.5;
 }
 .conn-image{
-    transform: translateY(-2.3px);
+    transform: translate(-1.3px,-2.3px);
 }
 
 

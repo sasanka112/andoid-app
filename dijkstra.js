@@ -324,7 +324,7 @@ var visitedBarText = d3.select(".chart").selectAll(".bartext").data(bardata)
 
 var edges_count = 0;
 var vertexCount = 0;
-// $("#svg_area circle").css("opacity","0");
+$("#svg_area circle").css("opacity","0");
 $("#svg_area circle").each(function(){
     var id_name  = $(this).attr("id");
 
@@ -631,7 +631,7 @@ function doDijkstraIteration(start, end, last) {
             // Print out the path
             addMsg( "Path found! Distance: "+end.distance );
 
-            console.log("first"+start.id_name + "---"+"end:"+end.id_name + "------- dist:"+end.distance);
+            // console.log("first"+start.id_name + "---"+"end:"+end.id_name + "------- dist:"+end.distance);
 
             // Calculate the Path by working backwards from the endpoint using the PREVIOUS pointers
             var pathBack = "";
@@ -663,7 +663,7 @@ function doDijkstraIteration(start, end, last) {
         resetDijkstra();
 
     } else {
-        console.log("Infinite~~~~~first"+start.id_name + "---"+"end:"+end.id_name + "------- dist:"+end.distance);
+        // console.log("Infinite~~~~~first"+start.id_name + "---"+"end:"+end.id_name + "------- dist:"+end.distance);
         // Check if there are still things to find
         if( unvisited.length > 0 ) {
             // Set a timer to pop and run it again at the next interval
@@ -831,6 +831,7 @@ $("#from-to-submit").click(function(){
     end.isEnd = true;
 
     var svgimg = document.createElementNS('http://www.w3.org/2000/svg','image');
+    svgimg.setAttributeNS(null,'id','source-icon');
     svgimg.setAttributeNS(null,'height','2');
     svgimg.setAttributeNS(null,'width','2');
     svgimg.setAttributeNS('http://www.w3.org/1999/xlink','href', 'source.png');
@@ -841,7 +842,7 @@ $("#from-to-submit").click(function(){
     $('#connected-lines').append(svgimg);
 
     svgimg = document.createElementNS('http://www.w3.org/2000/svg','image');
-    svgimg.setAttributeNS(null,'height','2');
+    svgimg.setAttributeNS(null,'height','3.5');
     svgimg.setAttributeNS(null,'width','2');
     svgimg.setAttributeNS('http://www.w3.org/1999/xlink','href', 'desination.png');
     svgimg.setAttributeNS(null,'x',end.x);
@@ -852,11 +853,49 @@ $("#from-to-submit").click(function(){
 
     startDijkstra(start, end);
 
-    $('html, body').animate({
-        scrollTop: $("#"+start.id_name).offset().top - 100
-    }, 500);
+    scrollToMiddleFocus($("#source-icon"));
+
+    // $('html, body').animate({
+    //     scrollTop: $("#"+start.id_name).offset().top - 100
+    // }, 500);
 });
 
+function scrollToMiddleFocus(element_focus){
+  var el = element_focus;
+  var elOffset = el.offset().top;
+  var elHeight = el.height();
+  var windowHeight = $(window).height();
+  var offset;
+
+  if (elHeight < windowHeight) {
+    offset = elOffset - ((windowHeight / 2) - (elHeight / 2));
+  }
+  else {
+    offset = elOffset;
+  }
+  $.smoothScroll({ speed: 700 }, offset);
+
+
+  var elOffsetLeft = el.offset().left;
+  var elWidth = el.width();
+  var windowWidth = $(window).width();
+  var offsetLeft;
+  var diffOffsetWidth = Math.abs(elOffsetLeft - windowWidth/2);
+  if(diffOffsetWidth > 20){
+      if (elWidth < windowWidth) {
+        offsetLeft = elOffsetLeft - ((windowWidth / 2) - (elWidth / 2));
+      }
+      else {
+        offsetLeft = elOffsetLeft;
+      }
+
+      $('html, #svg_area').animate({scrollLeft: offsetLeft}, 800);
+  }
+
+
+
+  
+}
 //var reset_clicked = false;
 $( "div#svg_area" ).dblclick(function() {
       var zoom_val = parseFloat($(this).css("zoom"));
