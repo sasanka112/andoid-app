@@ -837,4 +837,4 @@ $("#from-to-submit").click(function(){
 });
 
 
-$('#svg_area').touch();
+$('#png-img').touch();
