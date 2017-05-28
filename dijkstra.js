@@ -835,3 +835,6 @@ $("#from-to-submit").click(function(){
         scrollTop: $("#"+start.id_name).offset().top - 100
     }, 500);
 });
+
+
+$('#svg_area').touch();
