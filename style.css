@@ -202,3 +202,21 @@ div#search-wrapper {
     width: 100%;
 }
 
+
+div#svg_area {
+    width: 100%;
+    overflow: scroll;
+    zoom: 0.3;
+}
+
+.zoom_three{
+  zoom: 0.3 !important;
+}
+
+img#reset_zoom {
+    width: 29px;
+    margin-right: 20px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}

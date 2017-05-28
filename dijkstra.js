@@ -836,5 +836,27 @@ $("#from-to-submit").click(function(){
     }, 500);
 });
 
+var reset_clicked = false;
+$( "div#svg_area" ).dblclick(function() {
+    if(reset_clicked){
+        reset_clicked = false;
+        $(this).css("zoom",0.3);
+        $(this).removeClass("zoom_three");
+    }        
+      var zoom_val = parseFloat($(this).css("zoom"));
+      $(this).css("zoom",zoom_val + 0.1);
+});
 
-$('#png-img').touch();
+$("#reset_zoom").click(function(){
+    $("div#svg_area").removeAttr("zoom");
+    $("div#svg_area").addClass("zoom_three");
+    reset_clicked = true;
+});
+
+$(document).bind( "mobileinit", function(event) {
+       $.extend($.mobile.zoom, {locked:false,enabled:true});
+});
+
+
+
+
