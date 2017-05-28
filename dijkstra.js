@@ -324,7 +324,7 @@ var visitedBarText = d3.select(".chart").selectAll(".bartext").data(bardata)
 
 var edges_count = 0;
 var vertexCount = 0;
-$("#svg_area circle").css("opacity","0");
+// $("#svg_area circle").css("opacity","0");
 $("#svg_area circle").each(function(){
     var id_name  = $(this).attr("id");
 
@@ -456,9 +456,9 @@ $(".vertex").click(function() {
 
                 startDijkstra(start, end);
 
-                $('html, body').animate({
-                    scrollTop: $("#"+start.id_name).offset().top - 100
-                }, 500);
+                // $('html, body').animate({
+                //     scrollTop: $("#"+start.id_name).offset().top - 100
+                // }, 500);
 
 
             }
@@ -588,18 +588,23 @@ function doDijkstraIteration(start, end, last) {
 
                    // $("#connected-lines").append("<line x1='"+tentativeVertex.x+"' y1='"+tentativeVertex.y+"' x2='"+curVertex.x+"' y2='"+curVertex.y+"' style='stroke:rgb(255,0,0);stroke-width:5' />");
 
-                    var newLine = document.createElementNS('http://www.w3.org/2000/svg','line');
-                    newLine.setAttribute('id','line2');
-                    newLine.setAttribute('x1',tentativeVertex.x);
-                    newLine.setAttribute('y1',tentativeVertex.y);
-                    newLine.setAttribute('x2',curVertex.x);
-                    newLine.setAttribute('y2',curVertex.y);
-                    newLine.setAttribute('class','conn-line');
-                     $("#connected-lines").append(newLine);
+                    // var newLine = document.createElementNS('http://www.w3.org/2000/svg','line');
+                    // newLine.setAttribute('id','line2');
+                    // newLine.setAttribute('x1',tentativeVertex.x);
+                    // newLine.setAttribute('y1',tentativeVertex.y);
+                    // newLine.setAttribute('x2',curVertex.x);
+                    // newLine.setAttribute('y2',curVertex.y);
+                    // newLine.setAttribute('class','conn-line');
+                    //  $("#connected-lines").append(newLine);
 
                     tentativeVertex.distance = tentativeDistance;
                     tentativeVertex.previous = curVertex;
                     // Update distance labels
+                    // var temp_str = 0;
+
+                    // for(var i1=0;i1<10000;i1++)
+                    //     for(var i2=0;i2<10000;i2++)
+                    // //         temp_str += i2;
                     // console.log("curVertex"+curVertex + "---"+"curVertex.id_name:"+curVertex.id_name);
                     // console.log("tentativeDistance:"+tentativeDistance);
 
@@ -637,8 +642,13 @@ function doDijkstraIteration(start, end, last) {
               //  highlightEdge( cv.findEdge( cv.previous ), true, "path" );
                 // Generate a string as well
                // pathBack = " --" + cv.findEdge( cv.previous ).weight + "-> " + cv.id + pathBack;
+               console.log("cv.id_name--"+cv.id_name);
+               var cv_temp = cv.previous;
+               drawLineInSVG(cv,cv_temp);
+
                 cv = cv.previous;
             }
+            drawLineInSVG(cv,start);
             // Make sure to get the source included
             pathBack = cv.id + pathBack;
           //  highlightVertex( cv, true, "path" );
@@ -760,6 +770,17 @@ function highlightEdge( edge, on, cssclass ) {
 // mySort
 // A quick sorting function to be passed to the Array.sort()
 // This sort results in an descending list
+function drawLineInSVG(start_vertex,end_vertex){
+    var newLine = document.createElementNS('http://www.w3.org/2000/svg','line');
+    newLine.setAttribute('id','line2');
+    newLine.setAttribute('x1',start_vertex.x);
+    newLine.setAttribute('y1',start_vertex.y);
+    newLine.setAttribute('x2',end_vertex.x);
+    newLine.setAttribute('y2',end_vertex.y);
+    newLine.setAttribute('class','conn-line');
+    $("#connected-lines").append(newLine);
+}
+
 function mySort(a, b) {
     if( a == null && b == null ) return 0;
     if( a == null && b != null ) return 1;
@@ -836,26 +857,34 @@ $("#from-to-submit").click(function(){
     }, 500);
 });
 
-var reset_clicked = false;
+//var reset_clicked = false;
 $( "div#svg_area" ).dblclick(function() {
-    if(reset_clicked){
-        reset_clicked = false;
-        $(this).css("zoom",0.3);
-        $(this).removeClass("zoom_three");
-    }        
       var zoom_val = parseFloat($(this).css("zoom"));
       $(this).css("zoom",zoom_val + 0.1);
 });
 
-$("#reset_zoom").click(function(){
-    $("div#svg_area").removeAttr("zoom");
-    $("div#svg_area").addClass("zoom_three");
-    reset_clicked = true;
+$("#inc-zoom").click(function(){
+    var zoom_val = parseFloat($("div#svg_area").css("zoom"));
+    $("div#svg_area").css("zoom",zoom_val + 0.1);
 });
 
-$(document).bind( "mobileinit", function(event) {
-       $.extend($.mobile.zoom, {locked:false,enabled:true});
+$("#dec-zoom").click(function(){
+    var zoom_val = parseFloat($("div#svg_area").css("zoom"));
+    if(zoom_val > 0.15)
+        $("div#svg_area").css("zoom",zoom_val - 0.1);
+    else if(zoom_val < 0.15 && zoom_val > 0.02)
+        $("div#svg_area").css("zoom",zoom_val - 0.02);
 });
+
+// $("div#svg_area *").click(function(event){
+//     var b = event.target.getBBox(); 
+//     var svg = $("#BG4-4-075"); 
+//     svg.setAttribute("viewBox", b.x+" "+b.y+" "+b.width+" "+b.height);
+// });
+
+// $(document).bind( "mobileinit", function(event) {
+//        $.extend($.mobile.zoom, {locked:false,enabled:true});
+// });
 
 
 

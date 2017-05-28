@@ -206,7 +206,6 @@ div#search-wrapper {
 div#svg_area {
     width: 100%;
     overflow: scroll;
-    zoom: 0.3;
 }
 
 .zoom_three{
@@ -219,4 +218,19 @@ img#reset_zoom {
     position: absolute;
     bottom: 0;
     right: 0;
+}
+
+div#zoom-control {
+    background-color: black;
+    color: #fff;
+    border: 1px solid blue;
+    position: fixed;
+    bottom: 0;
+    right: 2%;
+    padding: 10;
+    cursor: pointer;
+}
+div#zoom-control div {
+    border: 1px solid;
+    padding: 10px;
 }
